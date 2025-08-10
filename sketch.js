@@ -119,7 +119,6 @@ function reset() {
 
 function toggleMic() {
   console.log("Toggling mic");
-    // toggle mic on/off 
     if (micEnabled) {
         console.log("Mic OFF");
         audio.stop();
@@ -131,13 +130,11 @@ function toggleMic() {
         fft.setInput(audio);
         amp.setInput(audio);
       });
-
     }
       micEnabled = !micEnabled;
 }
 
 function toggleInternalAudio() {
-  // TODO FIX THE AMP UPON SWITCH after INTERNAL
   console.log("Toggling internal audio mode");
   try { getAudioContext().resume(); } catch(e) {}
     if (!INTERNALAUDIOMODE) {
