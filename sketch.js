@@ -23,47 +23,10 @@ let FIVE_SECONDS = 60*5;
 let TEN_SECONDS = 60*10;
 let TWO_MINUTES = 60*2*60; // 2 minutes
 
-let punctuationMarks = [
-  ".", ",", ";", ":", "…", "?", "!", "?!", 
-  "(", ")", "[", "]", "{", "}", 
-  "־", "–", "-", "—", // hyphen, en dash, em dash
-  "’", "׳", "״", "“", "”", "‘", "’", "\"", "'", 
-  "/", "\\", "|", "¦", 
-  "&", "*", "@", "#", "~", "_", "°", "ˆ", "^", 
-  "†", "‡", "¶", "•", "№", "§", "%", "‰", "‱", "¤", 
-  "₪", "$", "¢", "€", "£", "¥",
-  "™", "®", "©",
-
-  // Spanish-style punctuation
-  "¡", "¿", "⸮",
-
-  // Hebrew niqqud (basic set)
-  "ַ", // pataḥ
-  "ָ", // qamaṣ
-  "ֶ", // segol
-  "ֵ", // ṣere
-  "ִ", // ḥiriq
-  "ֻ", // qibbuts
-  "ֱ", // ḥatef segol
-  "ֲ", // ḥatef pataḥ
-  "ֳ", // ḥatef qamaṣ
-  "ּ", // dagesh / shuruq dot
-  "ׁ", // shin dot right
-  "ׂ", // shin dot left
-  "ְ"  // sheva
-];
-
-let img;
-let glyphs;
-let chars = 'Aiii_v3.8686∅';
-let sz = 10;
-
 
 function preload(){
   // TODO
     // audiofile = loadSound('/assets/Alto_score_simulation-for-rony_5th-movement.wav');
-    	img = loadImage('face_3.png', _img => _img.loadPixels());
-
 }
 
 
