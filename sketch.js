@@ -1,3 +1,5 @@
+
+
 let backgroundcolor = 220;
 let canvas;
 
@@ -21,9 +23,47 @@ let FIVE_SECONDS = 60*5;
 let TEN_SECONDS = 60*10;
 let TWO_MINUTES = 60*2*60; // 2 minutes
 
+let punctuationMarks = [
+  ".", ",", ";", ":", "…", "?", "!", "?!", 
+  "(", ")", "[", "]", "{", "}", 
+  "־", "–", "-", "—", // hyphen, en dash, em dash
+  "’", "׳", "״", "“", "”", "‘", "’", "\"", "'", 
+  "/", "\\", "|", "¦", 
+  "&", "*", "@", "#", "~", "_", "°", "ˆ", "^", 
+  "†", "‡", "¶", "•", "№", "§", "%", "‰", "‱", "¤", 
+  "₪", "$", "¢", "€", "£", "¥",
+  "™", "®", "©",
+
+  // Spanish-style punctuation
+  "¡", "¿", "⸮",
+
+  // Hebrew niqqud (basic set)
+  "ַ", // pataḥ
+  "ָ", // qamaṣ
+  "ֶ", // segol
+  "ֵ", // ṣere
+  "ִ", // ḥiriq
+  "ֻ", // qibbuts
+  "ֱ", // ḥatef segol
+  "ֲ", // ḥatef pataḥ
+  "ֳ", // ḥatef qamaṣ
+  "ּ", // dagesh / shuruq dot
+  "ׁ", // shin dot right
+  "ׂ", // shin dot left
+  "ְ"  // sheva
+];
+
+let img;
+let glyphs;
+let chars = 'Aiii_v3.8686∅';
+let sz = 10;
+
+
 function preload(){
   // TODO
     // audiofile = loadSound('/assets/Alto_score_simulation-for-rony_5th-movement.wav');
+    	img = loadImage('face_3.png', _img => _img.loadPixels());
+
 }
 
 
@@ -32,15 +72,19 @@ function setup() {
     pixelDensity(10);
   }
 
+
   canvas = createCanvas(windowWidth, windowHeight-40); // 40 for buttons
   reset();
+
+  glyphs = generateIntensities(chars);
+
     
   // ui
   btnMic = createButton("Mic ON/OFF");
   btnExport = createButton("Export");
   btnInternalAudio = createButton("Internal Audio");
 
-  btnExport.mousePressed(() => {saveCanvas('aliasing.png');});
+  btnExport.mousePressed(() => {saveCanvas('spatial.png');});
 
   // toggle inputs
   btnMic.mousePressed(toggleMic);
@@ -53,53 +97,40 @@ function setup() {
 
 function draw() {
 
-  // future: return to this
-  // if (soundController) {
-  //   soundController.update(); 
-  //   soundController.drawVisualizer(soundVisualizerCanvas); // draw new visual
-  //   image(soundVisualizerCanvas, 0, 0); // draw ON TOP of main canvas
-  // }
-
   if ((micEnabled || INTERNALAUDIOMODE) && !PRMODE) {
 
-    // AMPLITUDE
-    // p5.Amplitude object keeps track of the volume of a sound, and we can get this number, that ranges between 0 and 1, using the getLevel() function
-    // var audio.getLevel();
-    // console.log("Mic level: " + ampLevel.toPrecision(2));
-    // console.log("AMP : " + amp.getLevel()); // same as direct mic
-
-    // we "init" twice this ampLevel, it seems they are different objects and need to run one over the other
-    // if (INTERNALAUDIOMODE) {
       var ampLevel = amp.getLevel(); // get the level of the audio file
-    // } else {
-      // var ampLevel = audio.getLevel(); // get the level of the mic input
-    // }
-
-
-    //FFT (Fast Fourier Transform) is an analysis algorithm that isolates individual audio frequencies within a waveform. The p5.FFT object can return two types of data in arrays via two different functions: waveform() and analyze()
-    // waveform(): Returns an array of amplitude values (between -1.0 and 1.0) along the time domain (a sample of time)
-    // analyze(): Returns an array of amplitude values (between 0 and 255) across the frequency spectrum.
     var waveform = fft.waveform(); 
-    // console.log("Waveform: " + waveform);
-    // console.log("Waveform: " + waveform.length);
-    // var spectrum = fft.analyze();
     fft.analyze();
 
-
-    if (DEBUG) {
-    // let bass = fft.getEnergy(20, 250);       // low
-    // let mids = fft.getEnergy(250, 2000);     // voice
-    // let highs = fft.getEnergy(2000, 10000);  // sibilance / noise
-    // console.log(`Bass: ${bass}  Mids: ${mids}  Highs: ${highs}`);
-    // let energy = fft.getEnergy(peakDetect.f1, peakDetect.f2);
-    // console.log('Current FFT energy:', energy);
-    }
-
-    // TODO draw sketch
-
-
     reset(); // clean canvas
+
+
+    
   }
+}
+
+
+// ########## Boiler Helpers #################
+
+function keyPressed() {
+  if (keyCode === LEFT_ARROW) {
+
+
+  } else if (keyCode === RIGHT_ARROW) {
+
+
+  } else if (keyCode === UP_ARROW) {
+
+
+  } else if (keyCode === DOWN_ARROW) {
+
+  // } else if (key === ('r' || 'R')) { // 
+
+
+  }
+  // prevent any default behavior.
+  return false;
 }
 
 function doubleClicked() {
